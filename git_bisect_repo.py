@@ -1,13 +1,9 @@
 import networkx as nx
 
 def load_dag_from_git_log(path="commits.txt"):
-    """
-    Učitava commit DAG iz datoteke dobivene s:
-    git log --pretty=format:"%H %P"
-    """
     G = nx.DiGraph()
 
-    with open(path, "r", encoding="utf-16") as f:
+    with open(path, "r", encoding="utf-8") as f:
         for line in f:
             parts = line.strip().split()
             if not parts:
@@ -55,11 +51,11 @@ def find_best_bisect_node(G, good, bad):
 
 
 if __name__ == "__main__":
-    # ⬇⬇⬇ OVDJE UNESI STVARNE HASH-EVE ⬇⬇⬇
-    GOOD = "2a024e5d8744e2fed158b371991f6692968a5d51"
-    BAD  = "5811d05541497db1ab56885e529dd85cc1d2a5ef"
+    #UNOS HASHEVA
+    GOOD = "e293f998a163db78cfea0f3b3f121d91807920d0"
+    BAD  = "704c34e21f7468fc72c33aa843051c7949ebeccd"
 
-    G = load_dag_from_git_log("commits.txt")
+    G = load_dag_from_git_log("commitsReact.txt")
     best, w, C = find_best_bisect_node(G, GOOD, BAD)
 
     print("=== Git bisect (real repo) ===")
